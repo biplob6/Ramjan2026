@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রমজান ২০২৬ - সঠিক সময়সূচি</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Hind+Siliguri:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --dark-green: #002b23;
+            --gold: #d4af37;
+            --light-gold: #f4e0a1;
+            --card-bg: rgba(0, 0, 0, 0.7);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+            background-color: var(--dark-green);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .background {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #004d40 0%, #001a14 100%);
+        }
+
+        /* চিকন চাঁদ */
+        .moon {
+            position: absolute;
+            top: 30px; right: 5%;
+            width: 60px; height: 60px;
+            box-shadow: 10px 8px 0 0 var(--light-gold);
+            border-radius: 50%;
+            transform: rotate(-15deg);
+            filter: drop-shadow(0 0 10px var(--gold));
+        }
+
+        .container {
+            width: 95%;
+            max-width: 850px;
+            margin: 40px auto;
+            text-align: center; /* সব এলিমেন্ট সেন্টারে রাখার জন্য */
+        }
+
+        h1 {
+            color: var(--gold);
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        /* ট্যাব বাটন সেন্টার */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 25px 0;
+            gap: 12px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 22px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--gold);
+            color: var(--dark-green);
+        }
+
+        .tab-content { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 25px;
+            padding: clamp(15px, 5vw, 30px);
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        /* টেবিল এবং ফন্ট ফিক্স */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 15px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 450px;
+            margin: 0 auto;
+        }
+
+        th {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-bottom: 2px solid var(--gold);
+            text-align: center;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 1.05rem;
+            text-align: center; /* ডাটা সেন্টারে থাকবে */
+            font-weight: 400;
+        }
+
+        .current-day {
+            background: rgba(212, 175, 55, 0.25);
+            color: #fff;
+        }
+
+        /* দোয়া ও তাসবিহ */
+        .arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            color: var(--light-gold);
+            margin: 15px 0;
+            line-height: 1.6;
+            direction: rtl;
+        }
+
+        .tasbeeh-display {
+            font-size: 5.5rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .tasbeeh-btn {
+            width: 130px; height: 130px;
+            border-radius: 50%;
+            border: 6px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            font-size: 3.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .tasbeeh-btn:active { transform: scale(0.9); }
+
+        @media (max-width: 600px) {
+            .container { margin: 20px auto; }
+            th, td { padding: 10px; font-size: 0.9rem; }
+            .arabic { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="background">
+    <div class="moon"></div>
+</div>
+
+<div class="container">
+    <h1>মাহে রমজান ২০২৬</h1>
+    <p id="liveDate" style="color: var(--light-gold); font-size: 1.1rem; margin-top: 0;"></p>
+
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="openTab('cal')">নামাজ ও ক্যালেন্ডার</button>
+        <button class="tab-btn" onclick="openTab('doa')">সেহরি, ইফতার ও তাসবিহ</button>
+    </div>
+
+    <div id="cal" class="tab-content active">
+        <div class="card">
+            <h3 style="color: var(--gold); margin-bottom: 15px;">৫ ওয়াক্ত নামাজের সময় (ঢাকা)</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>ফজর</th><th>জোহর</th><th>আসর</th><th>মাগরিব</th><th>এশা</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="fajr">--:--</td><td id="dhuhr">--:--</td>
+                            <td id="asr">--:--</td><td id="maghrib">--:--</td>
+                            <td id="isha">--:--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--gold); margin-bottom: 15px;">পূর্ণাঙ্গ ক্যালেন্ডার (ইসলামিক ফাউন্ডেশন)</h3>
+            <div class="table-wrapper">
+                <table id="fullCalendarTable">
+                    <thead>
+                        <tr><th>রমজান</th><th>তারিখ</th><th>সাহরীর শেষ</th><th>ইফতার</th></tr>
+                    </thead>
+                    <tbody id="calBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="doa" class="tab-content">
+        <div class="card">
+            <h2 style="color: var(--gold); margin-bottom: 5px;">আজকের বিশেষ সময়</h2>
+            <div style="font-size: 1.8rem; font-weight: 600;">
+                সাহরী শেষ: <span id="liveSehri" style="color: #00ffcc;">--:--</span><br>
+                ইফতার শুরু: <span id="liveIftar" style="color: var(--gold);">--:--</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--gold);">🤲 প্রয়োজনীয় দোয়া</h3>
+            <p><strong>সাহরীর নিয়ত:</strong></p>
+            <div class="arabic">نَوَيْتُ اَنْ اَصُوْمَ غَدًا مِّنْ شَهْرِ رَمْضَانَ الْمُبَارَكِ فَرْضًا لَكَ يَا اَللهُ فَتَقَبَّলْ مِنِّى اِنَّكَ اَنْتَ السَّمِيْعُ الْعَلِيْمُ</div>
+            <p><em>নাওয়াইতু আন আসুমা গাদাম মিন শাহরি রমাদানাল মুবারাকি ফারদাল্লাকা ইয়া আল্লাহু ফাতাকাব্বাল মিন্নি ইন্নাকা আনতাস সামিউল আলিম।</em></p>
+            <hr style="border: 0.1px solid rgba(212,175,55,0.2); margin: 25px 0;">
+            <p><strong>ইফতারের দোয়া:</strong></p>
+            <div class="arabic">اَللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ اَفْطَرْتُ</div>
+            <p><em>আল্লাহুম্মা লাকা সুমতু ওয়া আলা রিজকিকা আফতারতু।</em></p>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--gold);">📿 ডিজিটাল তাসবিহ</h3>
+            <div class="tasbeeh-display" id="count">০</div>
+            <button class="tasbeeh-btn" onclick="tally()">+</button>
+            <p onclick="resetTally()" style="cursor:pointer; text-decoration: underline; margin-top: 15px; color: #ccc;">রিসেট</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // PDF থেকে নেওয়া সঠিক ৩০ দিনের ডাটা
+    const ramadanData = [
+        {r:1, t:"১৯ ফেব্রু", s:"৫:১২", i:"৫:৫৮"}, {r:2, t:"২০ ফেব্রু", s:"৫:১১", i:"৫:৫৮"},
+        {r:3, t:"২১ ফেব্রু", s:"৫:১১", i:"৫:৫৯"}, {r:4, t:"২২ ফেব্রু", s:"৫:১০", i:"৫:৫৯"},
+        {r:5, t:"২৩ ফেব্রু", s:"৫:০৯", i:"৬:০০"}, {r:6, t:"২৪ ফেব্রু", s:"৫:০৮", i:"৬:০০"},
+        {r:7, t:"২৫ ফেব্রু", s:"৫:০৮", i:"৬:০১"}, {r:8, t:"২৬ ফেব্রু", s:"৫:০৭", i:"৬:০১"},
+        {r:9, t:"২৭ ফেব্রু", s:"৫:০৬", i:"৬:০২"}, {r:10, t:"২৮ ফেব্রু", s:"৫:০৫", i:"৬:০২"},
+        {r:11, t:"০১ মার্চ", s:"৫:০৫", i:"৬:০৩"}, {r:12, t:"০২ মার্চ", s:"৫:০৪", i:"৬:০৩"},
+        {r:13, t:"০৩ মার্চ", s:"৫:০৩", i:"৬:০৪"}, {r:14, t:"০৪ মার্চ", s:"৫:০২", i:"৬:০৪"},
+        {r:15, t:"০৫ মার্চ", s:"৫:০১", i:"৬:০৫"}, {r:16, t:"০৬ মার্চ", s:"৫:০০", i:"৬:০৫"},
+        {r:17, t:"০৭ মার্চ", s:"৪:৫৯", i:"৬:০৬"}, {r:18, t:"০৮ মার্চ", s:"৪:৫৮", i:"৬:০৬"},
+        {r:19, t:"০৯ মার্চ", s:"৪:৫৭", i:"৬:০৭"}, {r:20, t:"১০ মার্চ", s:"৪:৫৬", i:"৬:০৭"},
+        {r:21, t:"১১ মার্চ", s:"৪:৫৫", i:"৬:০৭"}, {r:22, t:"১২ মার্চ", s:"৪:৫৪", i:"৬:০৮"},
+        {r:23, t:"১৩ মার্চ", s:"৪:৫৩", i:"৬:০৮"}, {r:24, t:"১৪ মার্চ", s:"৪:৫২", i:"৬:০৯"},
+        {r:25, t:"১৫ মার্চ", s:"৪:৫১", i:"৬:০৯"}, {r:26, t:"১৬ মার্চ", s:"৪:৫০", i:"৬:১০"},
+        {r:27, t:"১৭ মার্চ", s:"৪:৪৯", i:"৬:১০"}, {r:28, t:"১৮ মার্চ", s:"৪:৪৮", i:"৬:১০"},
+        {r:29, t:"১৯ মার্চ", s:"৪:৪৭", i:"৬:১১"}, {r:30, t:"২০ মার্চ", s:"৪:৪৬", i:"৬:১১"}
+    ];
+
+    function format12(time) {
+        if (!time) return "--:--";
+        let [h, m] = time.split(':');
+        h = parseInt(h);
+        let ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        return `${h}:${m} ${ampm}`;
+    }
+
+    async function initApp() {
+        // ক্যালেন্ডার জেনারেট
+        const tbody = document.getElementById('calBody');
+        ramadanData.forEach(item => {
+            tbody.innerHTML += `<tr>
+                <td>${item.r.toLocaleString('bn-BD')}</td>
+                <td>${item.t}</td>
+                <td>${item.s} AM</td>
+                <td>${item.i} PM</td>
+            </tr>`;
+        });
+
+        // লাইভ API ডাটা
+        try {
+            const res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Dhaka&country=Bangladesh&method=1');
+            const json = await res.json();
+            const t = json.data.timings;
+            const d = json.data.date;
+
+            document.getElementById('fajr').innerText = format12(t.Fajr);
+            document.getElementById('dhuhr').innerText = format12(t.Dhuhr);
+            document.getElementById('asr').innerText = format12(t.Asr);
+            document.getElementById('maghrib').innerText = format12(t.Maghrib);
+            document.getElementById('isha').innerText = format12(t.Isha);
+
+            document.getElementById('liveSehri').innerText = format12(t.Imsak);
+            document.getElementById('liveIftar').innerText = format12(t.Maghrib);
+            document.getElementById('liveDate').innerText = d.readable + " | " + d.hijri.day + " " + d.hijri.month.bn;
+        } catch (e) { console.error("Error fetching times"); }
+    }
+
+    function openTab(name) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(name).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    let c = 0;
+    function tally() { c++; document.getElementById('count').innerText = c.toLocaleString('bn-BD'); }
+    function resetTally() { c = 0; document.getElementById('count').innerText = '০'; }
+
+    window.onload = initApp;
+</script>
+
+</body>
+</html>
